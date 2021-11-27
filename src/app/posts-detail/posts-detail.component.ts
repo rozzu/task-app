@@ -22,11 +22,15 @@ export class PostsDetailComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.route.snapshot.params['id']) {
-      const url = `/posts/${this.route.snapshot.params['id']}`
-      this.appService.findOne(url).subscribe(res => this.postData = res, err => {
-        this.router.navigate(['404',]);
-      })
+      this.getPost();
     }
+  }
+
+  getPost(): void {
+    const url = `/posts/${this.route.snapshot.params['id']}`
+    this.appService.findOne(url).subscribe(res => this.postData = res, err => {
+      this.router.navigate(['404',]);
+    })
   }
 
   back(): void {
